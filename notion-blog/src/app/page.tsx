@@ -5,11 +5,21 @@ async function getBlogDB() {
   const response = await notion.databases.query({
     database_id: dbid,
     filter: {
-      property: 'Tags',
-      multi_select: {
-        contains: 'Tec',
+      property: 'IsPublished',
+      select: {
+        equals: 'Published',
       },
     },
+  });
+  const blogNum = response.results.length;
+  for (const elem of response.results) {
+    await getPage(elem.id);
+  }
+}
+
+async function getPage(pageId: string) {
+  const response = await notion.pages.retrieve({
+    page_id: pageId,
   });
   console.log(response);
 }
