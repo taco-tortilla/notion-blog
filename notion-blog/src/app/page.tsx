@@ -13,6 +13,8 @@ export default function Home() {
       <div className="grid grid-cols-2 gap-5">
         <Article />
         <Article />
+        <Article />
+        <Article />
       </div>
     </main>
   );
