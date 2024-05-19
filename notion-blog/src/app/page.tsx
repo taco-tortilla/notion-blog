@@ -1,5 +1,5 @@
 import { Menu } from './components/home/Menu';
-import { Article } from './components/home/article';
+import { Article } from './components/home/Article';
 
 export default function Home() {
   return (
@@ -7,7 +7,13 @@ export default function Home() {
       <div className="pb-5">
         <Menu />
       </div>
-      <Article />
+      <div className="pb-5">
+        <Article />
+      </div>
+      <div className="grid grid-cols-2 gap-5">
+        <Article />
+        <Article />
+      </div>
     </main>
   );
 }
