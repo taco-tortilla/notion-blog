@@ -4,23 +4,23 @@ export function Categories() {
       <div className="bg-white p-10 rounded-md drop-shadow-md sticky top-10">
         <p className="text-lg font-bold pb-5">Categories</p>
         <ul>
-          <li className="py-2">
-            <a className="cursor-pointer">
+          <li>
+            <a className="cursor-pointer block hover:text-blue-400 py-2">
               <span className="pr-2">🎥</span>movie
             </a>
           </li>
-          <li className="py-2">
-            <a className="cursor-pointer">
+          <li>
+            <a className="cursor-pointer block hover:text-blue-400 py-2">
               <span className="pr-2">🧑🏻‍💻</span>tec
             </a>
           </li>
-          <li className="py-2">
-            <a className="cursor-pointer">
+          <li>
+            <a className="cursor-pointer block hover:text-blue-400 py-2">
               <span className="pr-2">📖</span>book
             </a>
           </li>
-          <li className="py-2">
-            <a className="cursor-pointer">
+          <li>
+            <a className="cursor-pointer block hover:text-blue-400 py-2">
               <span className="pr-2">💭</span>monologue
             </a>
           </li>
