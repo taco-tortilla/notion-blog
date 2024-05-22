@@ -19,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <Header />
-        <div className="grid grid-cols-12 gap-10 p-14">
-          {children}
-          <Categories />
+        <div className="container mx-auto px-5 md:px-14">
+          <Header />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 py-5 md:py-14">
+            {children}
+            <Categories />
+          </div>
         </div>
       </body>
     </html>

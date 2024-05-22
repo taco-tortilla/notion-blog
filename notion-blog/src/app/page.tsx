@@ -21,7 +21,7 @@ export default async function Home() {
   const articleList: Array<ArticleInfo> = await getData();
   console.log(articleList);
   return (
-    <main className="p-10 col-span-8 bg-white rounded-md drop-shadow-md">
+    <main className="p-6 sm:p-10 col-span-1 lg:col-span-8 bg-white rounded-md drop-shadow-md">
       <div className="pb-5">
         <Menu />
       </div>
@@ -34,7 +34,7 @@ export default async function Home() {
           image=""
         />
       </div>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {articleList &&
           articleList.map((article, index) => (
             <Article
