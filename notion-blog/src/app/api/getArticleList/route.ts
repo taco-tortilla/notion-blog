@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createArticleList } from '../../logic/mgArticle';
+import { createArticleList } from '../../logic/articleList';
 
 export async function GET() {
   const requestBody = {
@@ -9,6 +9,12 @@ export async function GET() {
         equals: 'Published',
       },
     },
+    sorts: [
+      {
+        property: 'CreatedAt',
+        direction: 'descending',
+      },
+    ],
   };
 
   try {

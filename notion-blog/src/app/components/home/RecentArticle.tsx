@@ -1,7 +1,7 @@
 import { ArticleInfo } from '@/app/types';
 import Link from 'next/link';
 
-export const Article = ({
+export const RecentArticle = ({
   id,
   title,
   description,
@@ -15,7 +15,7 @@ export const Article = ({
           {image !== '' ? (
             <img
               src={image}
-              className="object-cover rounded-md h-60 lg:h-54 w-full"
+              className="object-cover rounded-md h-60 lg:h-80 w-full"
               alt={title}
             />
           ) : (
