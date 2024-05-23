@@ -1,6 +1,6 @@
 import { NotionToMarkdown } from 'notion-to-md';
 import { Client } from '@notionhq/client';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -11,5 +11,5 @@ export async function GET(request: NextRequest) {
   const n2m = new NotionToMarkdown({ notionClient: notion });
   const mdblocks = await n2m.pageToMarkdown(query);
   const mdString = n2m.toMarkdownString(mdblocks);
-  return mdString.parent;
+  return NextResponse.json({ result: mdString.parent }, { status: 200 });
 }
