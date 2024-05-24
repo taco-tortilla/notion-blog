@@ -1,22 +1,22 @@
 import { NextResponse } from 'next/server';
-import { createArticleList } from '../../logic/articleList';
+import { createArticleList } from '../../logic/article';
+
+const requestBody = {
+  filter: {
+    property: 'IsPublished',
+    select: {
+      equals: 'Published',
+    },
+  },
+  sorts: [
+    {
+      property: 'CreatedAt',
+      direction: 'descending',
+    },
+  ],
+};
 
 export async function GET() {
-  const requestBody = {
-    filter: {
-      property: 'IsPublished',
-      select: {
-        equals: 'Published',
-      },
-    },
-    sorts: [
-      {
-        property: 'CreatedAt',
-        direction: 'descending',
-      },
-    ],
-  };
-
   try {
     const res = await fetch(
       'https://api.notion.com/v1/databases/5375b8cf33864b509a70f1f108378606/query',
