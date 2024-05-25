@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function Categories() {
   return (
     <div className="col-span-1 lg:col-span-4 rounded-md">
@@ -5,24 +7,36 @@ export function Categories() {
         <p className="text-lg font-bold pb-5">Categories</p>
         <ul>
           <li>
-            <a className="cursor-pointer block hover:text-blue-400 py-2">
+            <Link
+              href="/categories/movie"
+              className="cursor-pointer block hover:text-blue-400 py-2"
+            >
               <span className="pr-2">🎥</span>movie
-            </a>
+            </Link>
           </li>
           <li>
-            <a className="cursor-pointer block hover:text-blue-400 py-2">
+            <Link
+              href="/categories/tec"
+              className="cursor-pointer block hover:text-blue-400 py-2"
+            >
               <span className="pr-2">🧑🏻‍💻</span>tec
-            </a>
+            </Link>
           </li>
           <li>
-            <a className="cursor-pointer block hover:text-blue-400 py-2">
+            <Link
+              href="/categories/book"
+              className="cursor-pointer block hover:text-blue-400 py-2"
+            >
               <span className="pr-2">📖</span>book
-            </a>
+            </Link>
           </li>
           <li>
-            <a className="cursor-pointer block hover:text-blue-400 py-2">
+            <Link
+              href="/categories/monologue"
+              className="cursor-pointer block hover:text-blue-400 py-2"
+            >
               <span className="pr-2">💭</span>monologue
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

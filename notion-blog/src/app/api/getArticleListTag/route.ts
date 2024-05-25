@@ -1,10 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
-import {
-  createArticleList,
-  createRequestBodyForQueryDB,
-} from '../../logic/article';
+import { NextResponse } from 'next/server';
+import { createArticleList } from '../../logic/article';
+import { Client } from '@notionhq/client';
 
-const body = {
+const requestBody = {
   filter: {
     property: 'IsPublished',
     select: {
@@ -19,36 +17,7 @@ const body = {
   ],
 };
 
-const bodySub = {
-  filter: {
-    and: [
-      {
-        property: 'IsPublished',
-        select: {
-          equals: 'Published',
-        },
-      },
-      {
-        property: 'Tags',
-        select: {
-          equals: 'movie',
-        },
-      },
-    ],
-  },
-  sorts: [
-    {
-      property: 'CreatedAt',
-      direction: 'descending',
-    },
-  ],
-};
-
-export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const tag = searchParams.get('query');
-  const requestBody = tag !== null && createRequestBodyForQueryDB(tag);
-
+export async function GET() {
   try {
     const res = await fetch(
       'https://api.notion.com/v1/databases/5375b8cf33864b509a70f1f108378606/query',
@@ -82,3 +51,36 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
+// export async function GET() {
+//   try {
+//     const notion = new Client({ auth: process.env.NOTION_API_KEY });
+//     const res = await notion.databases.query({
+//       database_id: process.env.NOTION_DB,
+//       filter: {
+//         property: 'IsPublished',
+//         select: {
+//           equals: 'Published',
+//         },
+//       },
+//       sorts: [
+//         {
+//           property: 'CreatedAt',
+//           direction: 'descending',
+//         },
+//       ],
+//     });
+//     return NextResponse.json(res, {
+//       status: 200,
+//       headers: { 'Content-type': 'application/json' },
+//     });
+//   } catch (error) {
+//     return NextResponse.json(
+//       { error: 'Failed to fetch data from Notion API' },
+//       {
+//         status: 500,
+//         headers: { 'Content-Type': 'application/json' },
+//       }
+//     );
+//   }
+// }

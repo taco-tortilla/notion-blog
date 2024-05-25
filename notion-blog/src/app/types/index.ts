@@ -9,6 +9,7 @@ export type ArticleInfo = {
   description: string;
   createdAt: string;
   image: string;
+  tag?: string;
 };
 
 /**

@@ -1,6 +1,5 @@
 import { createArticleInfo } from '@/app/logic/article';
 import { Client } from '@notionhq/client';
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -11,7 +10,7 @@ export async function GET(request: NextRequest) {
     const res = await notion.pages.retrieve({ page_id: pageId });
 
     if ('properties' in res) {
-      const articleInfo = createArticleInfo(res as PageObjectResponse);
+      const articleInfo = createArticleInfo(res);
       return NextResponse.json(articleInfo, {
         status: 200,
         headers: { 'Content-type': 'application/json' },

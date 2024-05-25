@@ -2,25 +2,46 @@ import { ArticleInfo } from '@/app/types';
 import { Article } from './Article';
 import { Menu } from './Menu';
 import { RecentArticle } from './RecentArticle';
+import Pagenation from './Pagenation';
 
-async function getArticleList() {
+type Props = {
+  query: string;
+};
+
+type FetchResult =
+  | {
+      status: true;
+      result: Array<ArticleInfo>;
+    }
+  | { status: false; result: string };
+
+async function getArticleList(query: string) {
   try {
-    const res = await fetch('http://localhost:3000/api/getArticleList', {
-      cache: 'no-store',
-    });
+    const res = await fetch(
+      `http://localhost:3000/api/getArticleList?query=${query}`,
+      {
+        cache: 'no-store',
+      }
+    );
     if (!res.ok) {
       throw new Error(JSON.stringify(res));
     }
-    const data = await res.json();
-    return data;
+    const data: Array<ArticleInfo> = await res.json();
+    const result: FetchResult = { status: true, result: data };
+    return result;
   } catch (error) {
-    console.log(error);
+    const result: FetchResult = { status: false, result: 'Fetch failed' };
+    return result;
   }
 }
 
-export default async function ArticleList() {
-  const articleList: Array<ArticleInfo> = await getArticleList();
-  const recentArticle: ArticleInfo = articleList[0];
+export default async function ArticleList({ query }: Props) {
+  const fetchedData = await getArticleList(query);
+  let articleList: Array<ArticleInfo> = [];
+  if (fetchedData.status !== false) {
+    articleList = fetchedData.result;
+  }
+  const recentArticle = articleList[0];
 
   return (
     <div className="p-6 sm:p-10 col-span-1 lg:col-span-8 bg-white rounded-md drop-shadow-md">
@@ -34,6 +55,7 @@ export default async function ArticleList() {
           description={recentArticle.description}
           createdAt={recentArticle.createdAt}
           image={recentArticle.image}
+          tag={recentArticle.tag}
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -48,9 +70,11 @@ export default async function ArticleList() {
                 description={article.description}
                 createdAt={article.createdAt}
                 image={article.image}
+                tag={article.tag}
               />
             ))}
       </div>
+      <Pagenation />
     </div>
   );
 }

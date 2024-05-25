@@ -1,7 +1,4 @@
-import {
-  GetPageResponse,
-  PageObjectResponse,
-} from '@notionhq/client/build/src/api-endpoints';
+import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { ArticleInfo } from '../types';
 
 /**
@@ -26,6 +23,7 @@ export function createArticleList(data: string) {
           : '',
       createdAt: converDateFormat(page.properties.CreatedAt.created_time) ?? '',
       image: page.cover !== null ? page.cover.external.url : '',
+      tag: page.properties.Tags.select.name,
     };
     articleList.push(article);
   }
@@ -61,8 +59,62 @@ export function createArticleInfo(data: PageObjectResponse): ArticleInfo {
       data.cover && data.cover.type === 'external'
         ? data.cover.external.url
         : '',
+    tag:
+      'Tags' in data.properties && data.properties.Tags.type === 'select'
+        ? data.properties.Tags.select?.name
+        : 'undefined',
   };
   return articleInfoData;
+}
+
+/**
+ * Create request body for query a database (notion db).
+ *
+ */
+export function createRequestBodyForQueryDB(tag: string) {
+  if (tag !== 'all') {
+    let selectCategories = {
+      filter: {
+        and: [
+          {
+            property: 'IsPublished',
+            select: {
+              equals: 'Published',
+            },
+          },
+          {
+            property: 'Tags',
+            select: {
+              equals: tag,
+            },
+          },
+        ],
+      },
+      sorts: [
+        {
+          property: 'CreatedAt',
+          direction: 'descending',
+        },
+      ],
+    };
+    return selectCategories;
+  } else {
+    let noCategories = {
+      filter: {
+        property: 'IsPublished',
+        select: {
+          equals: 'Published',
+        },
+      },
+      sorts: [
+        {
+          property: 'CreatedAt',
+          direction: 'descending',
+        },
+      ],
+    };
+    return noCategories;
+  }
 }
 
 /**

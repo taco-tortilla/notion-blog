@@ -7,6 +7,7 @@ export const RecentArticle = ({
   description,
   createdAt,
   image,
+  tag,
 }: ArticleInfo) => {
   return (
     <Link href={`/article/${id}`}>
@@ -25,6 +26,12 @@ export const RecentArticle = ({
         <div className="pt-4">
           <p className="text-xl font-bold py-2">{title}</p>
           <p className="py-4">{description}</p>
+          <div className="py-2">
+            <span className="border bg-gray-50 rounded-full px-2 py-1 inline-block">
+              <span className="text-gray-400"># </span>
+              {tag}
+            </span>
+          </div>
           <p className="text-sm text-gray-400">{createdAt}</p>
         </div>
       </div>

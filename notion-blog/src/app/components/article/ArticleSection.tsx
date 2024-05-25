@@ -47,7 +47,6 @@ async function getArticleBody(id: string) {
 
 export default async function ArticleSection({ articleId }: Props) {
   const articleInfo = await getArticleInfo(articleId);
-  console.log(articleInfo);
   const ｍarkdown = await getArticleBody(articleId);
 
   return (
