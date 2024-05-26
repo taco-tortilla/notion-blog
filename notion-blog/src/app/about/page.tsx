@@ -4,7 +4,6 @@ import ProfileImage from '../../../public/profile.jpg';
 
 export default function About() {
   return (
-    // <main className="flex min-h-screen flex-col items-center justify-between p-24">
     <main className="grid grid-cols-1 py-5 md:py-14">
       <div className="flex flex-col items-center justify-center bg-white rounded-md drop-shadow-md p-6 md:p-20">
         <div className="py-5 md:py-10">
