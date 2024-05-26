@@ -1,7 +1,4 @@
-import WebIcon from '@mui/icons-material/Web';
-import EmailIcon from '@mui/icons-material/Email';
-import XIcon from '@mui/icons-material/X';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { Web, Email, X, GitHub } from '@mui/icons-material';
 import Image from 'next/image';
 import ProfileImage from '../../../public/profile.jpg';
 
@@ -29,16 +26,16 @@ export default function About() {
           </p>
           <div className="flex items-center justify-between">
             <a href="https://tortilla.page">
-              <WebIcon fontSize="large" />
+              <Web fontSize="large" />
             </a>
             <a href="https://x.com/tortillataco0">
-              <XIcon fontSize="large" />
+              <X fontSize="large" />
             </a>
             <a href="mailto:tortillataco00@gmail.com">
-              <GitHubIcon fontSize="large" />
+              <GitHub fontSize="large" />
             </a>
             <a href="mailto:tortillataco00@gmail.com">
-              <EmailIcon fontSize="large" />
+              <Email fontSize="large" />
             </a>
           </div>
         </div>
