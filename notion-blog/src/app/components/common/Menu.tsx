@@ -13,7 +13,7 @@ export const Menu = () => {
       </li>
       <li className="me-2">
         <Link
-          href="/"
+          href="/monthly"
           className="inline-block px-1 md:px-3 py-1 rounded-t-md hover:bg-gray-200 cursor-pointer"
         >
           Monthly

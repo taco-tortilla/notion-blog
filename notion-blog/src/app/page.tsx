@@ -1,5 +1,5 @@
+import { ArticleListSection } from './components/common/ArticleListSection';
 import { Categories } from './components/common/Categories';
-import ArticleList from './components/home/ArticleList';
 
 export default async function HomePage({
   params,
@@ -8,7 +8,7 @@ export default async function HomePage({
 }) {
   return (
     <main className="grid grid-cols-1 lg:grid-cols-12 gap-10 py-5 md:py-14">
-      <ArticleList query="all" />
+      <ArticleListSection query="all" page="home" />
       <Categories />
     </main>
   );

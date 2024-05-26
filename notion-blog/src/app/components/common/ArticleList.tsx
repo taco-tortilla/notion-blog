@@ -1,8 +1,6 @@
 import { ArticleInfo } from '@/app/types';
-import { Article } from './Article';
-import { Menu } from './Menu';
-import { RecentArticle } from './RecentArticle';
-import Pagenation from './Pagenation';
+import { Article } from '../common/Article';
+import { RecentArticle } from '../common/RecentArticle';
 
 type Props = {
   query: string;
@@ -15,10 +13,10 @@ type FetchResult =
     }
   | { status: false; result: string };
 
-async function getArticleList(query: string) {
+async function getArticleList(query: string): Promise<FetchResult> {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/getArticleList?query=${query}`,
+      `http://localhost:3000/api/getArticleList?query=${query}&year=All&month=All`,
       {
         cache: 'no-store',
       }
@@ -41,21 +39,17 @@ export default async function ArticleList({ query }: Props) {
   if (fetchedData.status !== false) {
     articleList = fetchedData.result;
   }
-  const recentArticle = articleList[0];
 
   return (
-    <div className="p-6 sm:p-10 col-span-1 lg:col-span-8 bg-white rounded-md drop-shadow-md">
-      <div className="pb-5">
-        <Menu />
-      </div>
+    <div>
       <div className="pb-5">
         <RecentArticle
-          id={recentArticle.id}
-          title={recentArticle.title}
-          description={recentArticle.description}
-          createdAt={recentArticle.createdAt}
-          image={recentArticle.image}
-          tag={recentArticle.tag}
+          id={articleList[0].id}
+          title={articleList[0].title}
+          description={articleList[0].description}
+          createdAt={articleList[0].createdAt}
+          image={articleList[0].image}
+          tag={articleList[0].tag}
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -74,7 +68,6 @@ export default async function ArticleList({ query }: Props) {
               />
             ))}
       </div>
-      <Pagenation />
     </div>
   );
 }

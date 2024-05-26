@@ -1,53 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   createArticleList,
-  createRequestBodyForQueryDB,
+  createRequestBodyFilterCategories,
+  createRequestBodyFilterYearAndMonth,
 } from '../../logic/article';
-
-const body = {
-  filter: {
-    property: 'IsPublished',
-    select: {
-      equals: 'Published',
-    },
-  },
-  sorts: [
-    {
-      property: 'CreatedAt',
-      direction: 'descending',
-    },
-  ],
-};
-
-const bodySub = {
-  filter: {
-    and: [
-      {
-        property: 'IsPublished',
-        select: {
-          equals: 'Published',
-        },
-      },
-      {
-        property: 'Tags',
-        select: {
-          equals: 'movie',
-        },
-      },
-    ],
-  },
-  sorts: [
-    {
-      property: 'CreatedAt',
-      direction: 'descending',
-    },
-  ],
-};
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const tag = searchParams.get('query');
-  const requestBody = tag !== null && createRequestBodyForQueryDB(tag);
+  const year = searchParams.get('year');
+  const month = searchParams.get('month');
+  let requestBody;
+  if (year === 'All' && month === 'All') {
+    requestBody = tag !== null && createRequestBodyFilterCategories(tag);
+  } else {
+    requestBody =
+      year !== null &&
+      month !== null &&
+      createRequestBodyFilterYearAndMonth(year, month);
+  }
 
   try {
     const res = await fetch(

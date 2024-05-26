@@ -1,5 +1,5 @@
 import { Categories } from '@/app/components/common/Categories';
-import ArticleList from '@/app/components/home/ArticleList';
+import { ArticleListSection } from '@/app/components/common/ArticleListSection';
 
 export default function CategoriesPage({
   params,
@@ -8,7 +8,7 @@ export default function CategoriesPage({
 }) {
   return (
     <main className="grid grid-cols-1 lg:grid-cols-12 gap-10 py-5 md:py-14">
-      <ArticleList query={params.category} />
+      <ArticleListSection query={params.category} page="categories" />
       <Categories />
     </main>
   );

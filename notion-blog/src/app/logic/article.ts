@@ -1,5 +1,6 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { ArticleInfo } from '../types';
+import { equal } from 'assert';
 
 /**
  * Create a article list from notion db.
@@ -69,9 +70,10 @@ export function createArticleInfo(data: PageObjectResponse): ArticleInfo {
 
 /**
  * Create request body for query a database (notion db).
- *
+ * Filter by categories.
+ * @return Request body object
  */
-export function createRequestBodyForQueryDB(tag: string) {
+export function createRequestBodyFilterCategories(tag: string) {
   if (tag !== 'all') {
     let selectCategories = {
       filter: {
@@ -115,6 +117,116 @@ export function createRequestBodyForQueryDB(tag: string) {
     };
     return noCategories;
   }
+}
+
+/**
+ * Create request body for query a database (notion db).
+ * Filter by created year and month.
+ * @returns Request body object
+ */
+export function createRequestBodyFilterYearAndMonth(
+  year: string,
+  month: string
+) {
+  let requestBody;
+  if (year === 'All' && month === 'All') {
+    requestBody = {
+      filter: {
+        property: 'IsPublished',
+        select: {
+          equals: 'Published',
+        },
+      },
+      sorts: [
+        {
+          property: 'CreatedAt',
+          direction: 'descending',
+        },
+      ],
+    };
+  } else if (year !== 'All' && month === 'All') {
+    requestBody = {
+      filter: {
+        and: [
+          {
+            property: 'IsPublished',
+            select: {
+              equals: 'Published',
+            },
+          },
+          {
+            property: 'Year',
+            formula: {
+              string: { equals: year },
+            },
+          },
+        ],
+      },
+      sorts: [
+        {
+          property: 'CreatedAt',
+          direction: 'descending',
+        },
+      ],
+    };
+  } else if (year === 'All' && month !== 'All') {
+    requestBody = {
+      filter: {
+        and: [
+          {
+            property: 'IsPublished',
+            select: {
+              equals: 'Published',
+            },
+          },
+          {
+            property: 'Month',
+            formula: {
+              string: { equals: month },
+            },
+          },
+        ],
+      },
+      sorts: [
+        {
+          property: 'CreatedAt',
+          direction: 'descending',
+        },
+      ],
+    };
+  } else if (year !== 'All' && month !== 'All') {
+    requestBody = {
+      filter: {
+        and: [
+          {
+            property: 'IsPublished',
+            select: {
+              equals: 'Published',
+            },
+          },
+          {
+            property: 'Year',
+            formula: {
+              string: { equals: year },
+            },
+          },
+          {
+            property: 'Month',
+            formula: {
+              string: { equals: month },
+            },
+          },
+        ],
+      },
+      sorts: [
+        {
+          property: 'CreatedAt',
+          direction: 'descending',
+        },
+      ],
+    };
+  }
+  return requestBody;
 }
 
 /**
