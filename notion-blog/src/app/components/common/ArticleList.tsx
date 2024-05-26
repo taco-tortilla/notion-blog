@@ -42,32 +42,38 @@ export default async function ArticleList({ query }: Props) {
 
   return (
     <div>
-      <div className="pb-5">
-        <RecentArticle
-          id={articleList[0].id}
-          title={articleList[0].title}
-          description={articleList[0].description}
-          createdAt={articleList[0].createdAt}
-          image={articleList[0].image}
-          tag={articleList[0].tag}
-        />
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {articleList &&
-          articleList
-            .slice(1)
-            .map((article, index) => (
-              <Article
-                key={index}
-                id={article.id}
-                title={article.title}
-                description={article.description}
-                createdAt={article.createdAt}
-                image={article.image}
-                tag={article.tag}
-              />
-            ))}
-      </div>
+      {articleList.length > 0 ? (
+        <div>
+          <div className="pb-5">
+            <RecentArticle
+              id={articleList[0].id}
+              title={articleList[0].title}
+              description={articleList[0].description}
+              createdAt={articleList[0].createdAt}
+              image={articleList[0].image}
+              tag={articleList[0].tag}
+            />
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            {articleList &&
+              articleList
+                .slice(1)
+                .map((article, index) => (
+                  <Article
+                    key={index}
+                    id={article.id}
+                    title={article.title}
+                    description={article.description}
+                    createdAt={article.createdAt}
+                    image={article.image}
+                    tag={article.tag}
+                  />
+                ))}
+          </div>
+        </div>
+      ) : (
+        <p>no data</p>
+      )}
     </div>
   );
 }
