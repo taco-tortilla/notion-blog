@@ -10,7 +10,7 @@ type Props = {
 async function getArticleInfo(id: string) {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/getArticleInfo?query=${id}`,
+      `https://tortilla-blog.vercel.app/api/getArticleInfo?query=${id}`,
       {
         cache: 'no-store',
       }
@@ -30,7 +30,7 @@ async function getArticleInfo(id: string) {
 async function getArticleBody(id: string) {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/getArticleBody?query=${id}`,
+      `https://tortilla-blog.vercel.app/api/getArticleBody?query=${id}`,
       {
         cache: 'no-store',
       }

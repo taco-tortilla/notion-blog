@@ -16,7 +16,7 @@ type FetchResult =
 async function getArticleList(query: string): Promise<FetchResult> {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/getArticleList?query=${query}&year=All&month=All`,
+      `https://tortilla-blog.vercel.app/api/getArticleList?query=${query}&year=All&month=All`,
       {
         cache: 'no-store',
       }
