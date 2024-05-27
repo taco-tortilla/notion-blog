@@ -1,6 +1,7 @@
 import { ArticleInfo } from '@/app/types';
 import { Article } from '../common/Article';
 import { RecentArticle } from '../common/RecentArticle';
+import { Nodata } from './Nodata';
 
 type Props = {
   query: string;
@@ -18,7 +19,7 @@ async function getArticleList(query: string): Promise<FetchResult> {
     const res = await fetch(
       `https://tortilla-blog.vercel.app/api/getArticleList?query=${query}&year=All&month=All`,
       {
-        cache: 'no-store',
+        next: { revalidate: 3000 },
       }
     );
     if (!res.ok) {
@@ -72,7 +73,7 @@ export default async function ArticleList({ query }: Props) {
           </div>
         </div>
       ) : (
-        <p>no data</p>
+        <Nodata />
       )}
     </div>
   );

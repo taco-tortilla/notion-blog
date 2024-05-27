@@ -2,6 +2,7 @@ import { ArticleInfo } from '@/app/types';
 import { useEffect, useState } from 'react';
 import { MonthlyRecentArticle } from './MonthlyRecentArticle';
 import { MonthlyArticle } from './MonthlyArticle';
+import { Nodata } from '../common/Nodata';
 
 type Props = {
   query: string;
@@ -25,7 +26,7 @@ async function getArticleList(
     const res = await fetch(
       `https://tortilla-blog.vercel.app/api/getArticleList?query=${query}&year=${year}&month=${month}`,
       {
-        cache: 'no-store',
+        next: { revalidate: 3000 },
       }
     );
     if (!res.ok) {
@@ -85,7 +86,7 @@ export default function MonthlyArticleList({ query, year, month }: Props) {
           </div>
         </div>
       ) : (
-        <p className="text-center text-xl py-10">No data</p>
+        <Nodata />
       )}
     </div>
   );

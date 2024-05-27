@@ -19,9 +19,7 @@ export const Article = ({
               className="object-cover rounded-md h-60 lg:h-54 w-full"
               alt={title}
             />
-          ) : (
-            ''
-          )}
+          ) : null}
         </div>
         <div className="pt-4">
           <p className="text-xl font-bold py-2">{title}</p>
