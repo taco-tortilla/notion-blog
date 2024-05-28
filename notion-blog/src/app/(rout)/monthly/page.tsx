@@ -1,5 +1,5 @@
-import { Categories } from '../components/common/Categories';
-import { MonthlyArticleListSection } from '../components/monthly/MonthlyArticleListSection';
+import { Categories } from '@/app/components/common/Categories';
+import { MonthlyArticleListSection } from '@/app/components/monthly/MonthlyArticleListSection';
 
 export default async function MonthlyPage() {
   return (

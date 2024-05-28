@@ -43,7 +43,7 @@ export default function YearAndMonthPicker({
           id="year-picker"
           value={year}
           onChange={handleChangeYear}
-          className="m-2 outline-none text-xl w-20"
+          className="m-2 outline-none md:text-xl w-20"
         >
           <option value="">All</option>
           {generateYearOptions().map((option) => option)}
@@ -54,7 +54,7 @@ export default function YearAndMonthPicker({
           id="month-picker"
           value={month}
           onChange={handleChangeMonth}
-          className="m-2 outline-none text-xl w-14"
+          className="m-2 outline-none md:text-xl w-14"
         >
           <option value="">All</option>
           <option value="1">1</option>

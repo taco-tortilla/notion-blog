@@ -19,7 +19,7 @@ export function Categories() {
               href="/categories/tec"
               className="cursor-pointer block hover:text-blue-400 py-2"
             >
-              <span className="pr-2">🧑🏻‍💻</span>tec
+              <span className="pr-2">💻</span>tec
             </Link>
           </li>
           <li>

@@ -1,6 +1,6 @@
 import { Web, Email, X, GitHub } from '@mui/icons-material';
 import Image from 'next/image';
-import ProfileImage from '../../../public/profile.jpg';
+import ProfileImage from '../../../../public/profile.jpg';
 
 export default function About() {
   return (
@@ -30,7 +30,7 @@ export default function About() {
             <a href="https://x.com/tortillataco0">
               <X fontSize="large" />
             </a>
-            <a href="mailto:tortillataco00@gmail.com">
+            <a href="https://github.com/taco-tortilla">
               <GitHub fontSize="large" />
             </a>
             <a href="mailto:tortillataco00@gmail.com">
