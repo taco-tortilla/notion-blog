@@ -1,5 +1,7 @@
 import { Menu } from '../common/Menu';
 import ArticleList from '../common/ArticleList';
+import { Suspense } from 'react';
+import { Loading } from './Loading';
 
 type Props = {
   query: string;
@@ -12,7 +14,9 @@ export function ArticleListSection({ query, page }: Props) {
       <div className="pb-5">
         <Menu />
       </div>
-      <ArticleList query={query} />
+      <Suspense fallback={<Loading />}>
+        <ArticleList query={query} />
+      </Suspense>
     </div>
   );
 }
