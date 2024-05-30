@@ -1,6 +1,5 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { ArticleInfo } from '../types';
-import { equal } from 'assert';
 
 /**
  * Create a article list from notion db.
