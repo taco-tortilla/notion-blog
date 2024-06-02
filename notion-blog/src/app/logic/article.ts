@@ -22,7 +22,7 @@ export function createArticleList(data: string) {
           ? page.properties.Description.rich_text[0].plain_text
           : '',
       createdAt: converDateFormat(page.properties.CreatedAt.created_time) ?? '',
-      image: page.cover !== null ? page.cover.external.url : '',
+      image: page.cover !== null ? page.cover.file.url : '',
       tag: page.properties.Tags.select.name,
     };
     articleList.push(article);
@@ -55,10 +55,7 @@ export function createArticleInfo(data: PageObjectResponse): ArticleInfo {
       data.properties.CreatedAt.type === 'created_time'
         ? converDateFormat(data.properties.CreatedAt.created_time)
         : '',
-    image:
-      data.cover && data.cover.type === 'external'
-        ? data.cover.external.url
-        : '',
+    image: data.cover && data.cover.type === 'file' ? data.cover.file.url : '',
     tag:
       'Tags' in data.properties && data.properties.Tags.type === 'select'
         ? data.properties.Tags.select?.name

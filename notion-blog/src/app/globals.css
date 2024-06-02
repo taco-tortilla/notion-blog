@@ -52,7 +52,7 @@ body {
 } */
 
 .markdown p {
-  @apply mb-4;
+  @apply mb-4 text-base md:text-lg;
 }
 
 .markdown li + li {
