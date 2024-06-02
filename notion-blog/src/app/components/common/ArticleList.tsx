@@ -19,7 +19,7 @@ async function getArticleList(query: string): Promise<FetchResult> {
     const res = await fetch(
       `https://tortilla-blog.vercel.app/api/getArticleList?query=${query}&year=All&month=All`,
       {
-        next: { revalidate: 3000 },
+        cache: 'no-store',
       }
     );
     if (!res.ok) {

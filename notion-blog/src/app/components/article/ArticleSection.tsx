@@ -11,9 +11,7 @@ async function getArticleInfo(id: string) {
   try {
     const res = await fetch(
       `https://tortilla-blog.vercel.app/api/getArticleInfo?query=${id}`,
-      {
-        next: { revalidate: 3000 },
-      }
+      { cache: 'no-store' }
     );
     if (!res.ok) {
       throw new Error(JSON.stringify(res));
@@ -32,7 +30,7 @@ async function getArticleBody(id: string) {
     const res = await fetch(
       `https://tortilla-blog.vercel.app/api/getArticleBody?query=${id}`,
       {
-        next: { revalidate: 3000 },
+        cache: 'no-store',
       }
     );
     if (!res.ok) {
