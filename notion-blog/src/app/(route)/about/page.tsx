@@ -24,9 +24,6 @@ export default function About() {
             Thanks for comming my blog ^^
           </p>
           <div className="flex items-center justify-between">
-            <a href="https://tortilla.page">
-              <Web fontSize="large" />
-            </a>
             <a href="https://x.com/tortillataco0">
               <X fontSize="large" />
             </a>
