@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { MonthlyRecentArticle } from './MonthlyRecentArticle';
 import { MonthlyArticle } from './MonthlyArticle';
 import { Nodata } from '../common/Nodata';
+import { Loading } from '../common/Loading';
 
 type Props = {
   query: string;
@@ -24,7 +25,7 @@ async function getArticleList(
 ): Promise<FetchResult> {
   try {
     const res = await fetch(
-      `https://tortilla-blog.vercel.app/api/getArticleList?query=${query}&year=${year}&month=${month}`,
+      `http://localhost:3000/api/getArticleList?query=${query}&year=${year}&month=${month}`,
       {
         cache: 'no-store',
       }
@@ -43,50 +44,59 @@ async function getArticleList(
 
 export default function MonthlyArticleList({ query, year, month }: Props) {
   const [articleList, setArticleList] = useState<Array<ArticleInfo>>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     async function fetch() {
       const fetchedData = await getArticleList(query, year, month);
       if (fetchedData.status !== false) {
         setArticleList(fetchedData.result);
       }
+      setIsLoading(true);
     }
     fetch();
   }, [year, month, query]);
 
   return (
     <div>
-      {articleList.length !== 0 ? (
-        <div>
-          <div className="pb-5">
-            <MonthlyRecentArticle
-              id={articleList[0].id}
-              title={articleList[0].title}
-              description={articleList[0].description}
-              createdAt={articleList[0].createdAt}
-              image={articleList[0].image}
-              tag={articleList[0].tag}
-            />
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            {articleList &&
-              articleList
-                .slice(1)
-                .map((article, index) => (
-                  <MonthlyArticle
-                    key={index}
-                    id={article.id}
-                    title={article.title}
-                    description={article.description}
-                    createdAt={article.createdAt}
-                    image={article.image}
-                    tag={article.tag}
-                  />
-                ))}
-          </div>
-        </div>
+      {!isLoading ? (
+        <>
+          {articleList.length !== 0 ? (
+            <div>
+              <div className="pb-5">
+                <MonthlyRecentArticle
+                  id={articleList[0].id}
+                  title={articleList[0].title}
+                  description={articleList[0].description}
+                  createdAt={articleList[0].createdAt}
+                  image={articleList[0].image}
+                  tag={articleList[0].tag}
+                />
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                {articleList &&
+                  articleList
+                    .slice(1)
+                    .map((article, index) => (
+                      <MonthlyArticle
+                        key={index}
+                        id={article.id}
+                        title={article.title}
+                        description={article.description}
+                        createdAt={article.createdAt}
+                        image={article.image}
+                        tag={article.tag}
+                      />
+                    ))}
+              </div>
+            </div>
+          ) : (
+            <Nodata />
+          )}
+        </>
       ) : (
-        <Nodata />
+        <Loading />
       )}
     </div>
   );

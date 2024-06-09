@@ -13,6 +13,7 @@ export default function About() {
             height={150}
             alt="Picture of profile"
             className="rounded-full"
+            placeholder="blur"
           />
         </div>
         <div className="py-10">

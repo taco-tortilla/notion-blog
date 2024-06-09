@@ -3,7 +3,8 @@
 import { Menu } from '../common/Menu';
 import YearAndMonthPicker from './YearAndMonthPicker';
 import MonthlyArticleList from './MonthlyArticleList';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
+import { Loading } from '../common/Loading';
 
 type Props = {
   query: string;
@@ -27,7 +28,9 @@ export function MonthlyArticleListSection({ query, page }: Props) {
           setMonth={setMonth}
         />
       </div>
-      <MonthlyArticleList query={query} year={year} month={month} />
+      <Suspense fallback={<Loading />}>
+        <MonthlyArticleList query={query} year={year} month={month} />
+      </Suspense>
     </div>
   );
 }
