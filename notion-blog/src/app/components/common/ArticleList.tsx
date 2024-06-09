@@ -1,6 +1,6 @@
 import { ArticleInfo } from '@/app/types';
-import { Article } from '../common/Article';
-import { RecentArticle } from '../common/RecentArticle';
+import { ArticleItem } from './ArticleItem';
+import { ArticleItemRecent } from './ArticleItemRecent';
 import { Nodata } from './Nodata';
 
 type Props = {
@@ -17,7 +17,7 @@ type FetchResult =
 async function getArticleList(query: string): Promise<FetchResult> {
   try {
     const res = await fetch(
-      `https://tortilla-blog.vercel.app/api/getArticleList?query=${query}&year=All&month=All`,
+      `https://tortilla-blog.vercel.app/api/article-list?query=${query}&year=All&month=All`,
       {
         cache: 'no-store',
       }
@@ -46,7 +46,7 @@ export default async function ArticleList({ query }: Props) {
       {articleList.length > 0 ? (
         <div>
           <div className="pb-5">
-            <RecentArticle
+            <ArticleItemRecent
               id={articleList[0].id}
               title={articleList[0].title}
               description={articleList[0].description}
@@ -60,7 +60,7 @@ export default async function ArticleList({ query }: Props) {
               articleList
                 .slice(1)
                 .map((article, index) => (
-                  <Article
+                  <ArticleItem
                     key={index}
                     id={article.id}
                     title={article.title}

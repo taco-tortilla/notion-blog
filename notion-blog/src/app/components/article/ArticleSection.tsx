@@ -1,6 +1,5 @@
 import { ArticleBody } from '@/app/components/article/ArticleBody';
 import { ArticleHeader } from '@/app/components/article/ArticleHeader';
-import { Categories } from '@/app/components/common/Categories';
 import { ArticleInfo, FetchResult } from '@/app/types';
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
 async function getArticleInfo(id: string) {
   try {
     const res = await fetch(
-      `https://tortilla-blog.vercel.app/api/getArticleInfo?query=${id}`,
+      `https://tortilla-blog.vercel.app/api/article-info?query=${id}`,
       { cache: 'no-store' }
     );
     if (!res.ok) {
@@ -28,7 +27,7 @@ async function getArticleInfo(id: string) {
 async function getArticleBody(id: string) {
   try {
     const res = await fetch(
-      `https://tortilla-blog.vercel.app/api/getArticleBody?query=${id}`,
+      `https://tortilla-blog.vercel.app/api/article-body?query=${id}`,
       {
         cache: 'no-store',
       }

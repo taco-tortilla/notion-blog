@@ -1,7 +1,7 @@
 import { ArticleInfo } from '@/app/types';
 import { useEffect, useState } from 'react';
-import { MonthlyRecentArticle } from './MonthlyRecentArticle';
-import { MonthlyArticle } from './MonthlyArticle';
+import { MonthlyArticleItemRecent } from './MonthlyArticleItemRecent';
+import { MonthlyArticleItem } from './MonthlyArticleItem';
 import { Nodata } from '../common/Nodata';
 import { Loading } from '../common/Loading';
 
@@ -25,7 +25,7 @@ async function getArticleList(
 ): Promise<FetchResult> {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/getArticleList?query=${query}&year=${year}&month=${month}`,
+      `https://tortilla-blog.vercel.app/api/article-list?query=${query}&year=${year}&month=${month}`,
       {
         cache: 'no-store',
       }
@@ -53,7 +53,7 @@ export default function MonthlyArticleList({ query, year, month }: Props) {
       if (fetchedData.status !== false) {
         setArticleList(fetchedData.result);
       }
-      setIsLoading(true);
+      setIsLoading(false);
     }
     fetch();
   }, [year, month, query]);
@@ -65,7 +65,7 @@ export default function MonthlyArticleList({ query, year, month }: Props) {
           {articleList.length !== 0 ? (
             <div>
               <div className="pb-5">
-                <MonthlyRecentArticle
+                <MonthlyArticleItemRecent
                   id={articleList[0].id}
                   title={articleList[0].title}
                   description={articleList[0].description}
@@ -79,7 +79,7 @@ export default function MonthlyArticleList({ query, year, month }: Props) {
                   articleList
                     .slice(1)
                     .map((article, index) => (
-                      <MonthlyArticle
+                      <MonthlyArticleItem
                         key={index}
                         id={article.id}
                         title={article.title}
