@@ -8,14 +8,6 @@ export function Categories() {
         <ul>
           <li>
             <Link
-              href="/categories/tec"
-              className="cursor-pointer block hover:text-blue-400 py-2"
-            >
-              <span className="pr-2">💻</span>tec
-            </Link>
-          </li>
-          <li>
-            <Link
               href="/categories/movie"
               className="cursor-pointer block hover:text-blue-400 py-2"
             >
@@ -28,6 +20,14 @@ export function Categories() {
               className="cursor-pointer block hover:text-blue-400 py-2"
             >
               <span className="pr-2">📖</span>book
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/categories/tec"
+              className="cursor-pointer block hover:text-blue-400 py-2"
+            >
+              <span className="pr-2">🪴</span>plants
             </Link>
           </li>
           <li>
